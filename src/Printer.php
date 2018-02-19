@@ -67,13 +67,13 @@ class Printer extends ResultPrinter
             $numberOfColumns = $console->getNumberOfColumns();
         }
         $this->maxNumberOfColumns = $numberOfColumns;
-        $this->maxClassNameLength = (int)($numberOfColumns * 0.4);
+        $this->maxClassNameLength = (int) ($numberOfColumns * 0.4);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function writeProgress($progress)
+    protected function writeProgress($progress):void
     {
         if ($this->debug) {
             parent::writeProgress($progress);
@@ -89,7 +89,7 @@ class Printer extends ResultPrinter
     /**
      * {@inheritdoc}
      */
-    protected function writeProgressWithColor($color, $buffer)
+    protected function writeProgressWithColor($color, $buffer):void
     {
         if ($this->debug) {
             parent::writeProgressWithColor($color, $buffer);
@@ -105,7 +105,7 @@ class Printer extends ResultPrinter
      *
      * @throws \ReflectionException
      */
-    public function startTest(Test $test)
+    public function startTest(Test $test) : void
     {
         $class = new ReflectionClass(get_class($test));
         $remove = str_replace(array('/vendor/josrom', '/phpunit-unicode-printer/src'), '', dirname(__FILE__));
