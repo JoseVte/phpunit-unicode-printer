@@ -8,7 +8,7 @@
 
 ### Installation
 
-To get the last version of ChannelLog, simply require the project using [Composer](https://getcomposer.org/):
+To get the last version of PHPUnit Unicode Printer, simply require the project using [Composer](https://getcomposer.org/):
 
 ```bash
 composer require josrom/phpunit-unicode-printer:0.1.*
