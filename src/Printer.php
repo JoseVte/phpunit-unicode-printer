@@ -3,8 +3,8 @@
 namespace PHPUnit;
 
 use ReflectionClass;
-use PHPUnit_Framework_Test;
-use PHPUnit_TextUI_ResultPrinter;
+use PHPUnit\Framework\Test;
+use PHPUnit\TextUI\ResultPrinter;
 use SebastianBergmann\Environment\Console;
 
 /**
@@ -12,7 +12,7 @@ use SebastianBergmann\Environment\Console;
  *
  * @license MIT
  */
-class Printer extends PHPUnit_TextUI_ResultPrinter
+class Printer extends ResultPrinter
 {
     /** @var string */
     private $className = '';
@@ -105,7 +105,7 @@ class Printer extends PHPUnit_TextUI_ResultPrinter
      *
      * @throws \ReflectionException
      */
-    public function startTest(PHPUnit_Framework_Test $test)
+    public function startTest(Test $test)
     {
         $class = new ReflectionClass(get_class($test));
         $remove = str_replace(array('/vendor/josrom', '/phpunit-unicode-printer/src'), '', dirname(__FILE__));

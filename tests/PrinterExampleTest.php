@@ -1,15 +1,9 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 class PrinterExampleTest extends TestCase
 {
-    /**
-     * Default preparation for each test.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /**
      * @test
      */
