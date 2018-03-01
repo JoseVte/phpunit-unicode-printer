@@ -13,7 +13,7 @@ use SebastianBergmann\Environment\Console;
  *
  * @license MIT
  */
-class Printer extends ResultPrinter implements TestListener
+class PrinterClass extends ResultPrinter implements TestListener
 {
     use FormatOutput;
 
@@ -70,7 +70,7 @@ class Printer extends ResultPrinter implements TestListener
             $numberOfColumns = $console->getNumberOfColumns();
         }
         $this->maxNumberOfColumns = $numberOfColumns;
-        $this->maxClassNameLength = (int) ($numberOfColumns * 0.4);
+        $this->maxClassNameLength = (int) ($numberOfColumns * 0.6);
     }
 
     /**
@@ -81,9 +81,11 @@ class Printer extends ResultPrinter implements TestListener
     public function startTest(Test $test) : void
     {
         $class = new ReflectionClass(get_class($test));
+        $className = $class->getShortName();
         $remove = str_replace(array('/vendor/josrom', '/phpunit-unicode-printer/src'), '', dirname(__FILE__));
         $class = str_replace(array($remove, '/tests'), '', dirname($class->getFileName()));
         $this->className = empty($class) ? ' > Unit tests' : str_replace('/', ' > ', $class);
+        $this->className .= ' > '.$className;
         parent::startTest($test);
     }
 }
