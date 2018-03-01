@@ -5,6 +5,7 @@ namespace PHPUnit;
 use ReflectionClass;
 use PHPUnit_Framework_Test;
 use PHPUnit_TextUI_ResultPrinter;
+use PHPUnit_Framework_TestListener;
 use SebastianBergmann\Environment\Console;
 
 /**
@@ -12,7 +13,7 @@ use SebastianBergmann\Environment\Console;
  *
  * @license MIT
  */
-class Printer extends PHPUnit_TextUI_ResultPrinter
+class PrinterClass extends PHPUnit_TextUI_ResultPrinter implements PHPUnit_Framework_TestListener
 {
     use FormatOutput;
 
@@ -69,7 +70,7 @@ class Printer extends PHPUnit_TextUI_ResultPrinter
             $numberOfColumns = $console->getNumberOfColumns();
         }
         $this->maxNumberOfColumns = $numberOfColumns;
-        $this->maxClassNameLength = (int) ($numberOfColumns * 0.4);
+        $this->maxClassNameLength = (int)($numberOfColumns * 0.6);
     }
 
     /**
@@ -83,6 +84,7 @@ class Printer extends PHPUnit_TextUI_ResultPrinter
         $remove = str_replace(array('/vendor/josrom', '/phpunit-unicode-printer/src'), '', dirname(__FILE__));
         $class = str_replace(array($remove, '/tests'), '', dirname($class->getFileName()));
         $this->className = empty($class) ? ' > Unit tests' : str_replace('/', ' > ', $class);
+        $this->className .= ' > '.get_class($test);
         parent::startTest($test);
     }
 }
