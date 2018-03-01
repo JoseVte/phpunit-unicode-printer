@@ -8,21 +8,21 @@
 
 ### PHPUnit <5
 
-For previous versions of PHPUnit use the tag [`0.1.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/0.1.0)
+For previous versions of PHPUnit use the tag [`0.1.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit-5)
 
 ### Installation
 
 To get the last version of PHPUnit Unicode Printer, simply require the project using [Composer](https://getcomposer.org/):
 
 ```bash
-composer require josrom/phpunit-unicode-printer:0.2.*
+composer require --dev josrom/phpunit-unicode-printer:0.2.*
 ```
 
 Instead, you may of course manually update your require block and run composer update if you so choose:
 
 ```json
 {
-    "require": {
+    "require-dev": {
         "josrom/phpunit-unicode-printer": "0.2.*"
     }
 }
@@ -34,6 +34,17 @@ Modify the `phpunit.xml` to add the printer:
 <phpunit ...
          colors="true"
          printerClass="PhpUnit\Printer"
+         ...>
+         ...
+ </phpunit>
+```
+
+or
+
+```xml
+<phpunit ...
+         colors="true"
+         printerClass="PhpUnit\PrinterClass"
          ...>
          ...
  </phpunit>
