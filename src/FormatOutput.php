@@ -10,7 +10,7 @@ trait FormatOutput
     /**
      * {@inheritdoc}
      */
-    protected function writeProgress($progress):void
+    protected function writeProgress(string $progress): void
     {
         if ($this->debug) {
             parent::writeProgress($progress);
@@ -26,7 +26,7 @@ trait FormatOutput
     /**
      * {@inheritdoc}
      */
-    protected function writeProgressWithColor($color, $buffer):void
+    protected function writeProgressWithColor(string $color, string $buffer): void
     {
         if ($this->debug) {
             parent::writeProgressWithColor($color, $buffer);
