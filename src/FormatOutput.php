@@ -110,7 +110,7 @@ trait FormatOutput
                 break;
         }
 
-        $this->write(parent::formatWithColor($color, $buffer));
+        $this->write(parent::colorizeTextBox($color, $buffer));
         $this->spaceAfter += strlen($buffer);
         ++$this->column;
         ++$this->numTestsRun;
@@ -165,6 +165,7 @@ trait FormatOutput
 
     /**
      * {@inheritdoc}
+     * @throws \ReflectionException
      */
     protected function printDefectTrace(TestFailure $defect) : void
     {

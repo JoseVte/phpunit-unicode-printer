@@ -18,6 +18,7 @@ class PrinterExampleTest extends TestCase
     public function it_checks_test_risky()
     {
         $this->markAsRisky();
+        $this->assertEquals(2, 2);
     }
 
     /**
@@ -25,6 +26,7 @@ class PrinterExampleTest extends TestCase
      */
     public function it_checks_test_incomplete()
     {
+        $this->assertEquals(2, 2);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
@@ -41,7 +43,7 @@ class PrinterExampleTest extends TestCase
      */
     public function it_checks_test_warning()
     {
-        $this->getMockWithoutInvokingTheOriginalConstructor('BasketRepository');
+        $this->addWarning('BasketRepository not exists');
     }
 
     /**

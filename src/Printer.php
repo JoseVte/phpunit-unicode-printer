@@ -4,8 +4,8 @@ namespace PHPUnit;
 
 use ReflectionClass;
 use PHPUnit\Framework\Test;
+use PHPUnit\Runner\TestHook;
 use PHPUnit\TextUI\ResultPrinter;
-use PHPUnit\Framework\TestListener;
 use SebastianBergmann\Environment\Console;
 
 /**
@@ -13,7 +13,7 @@ use SebastianBergmann\Environment\Console;
  *
  * @license MIT
  */
-class Printer extends ResultPrinter implements TestListener
+class Printer extends ResultPrinter implements TestHook
 {
     use FormatOutput;
 
