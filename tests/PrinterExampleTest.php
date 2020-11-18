@@ -7,41 +7,41 @@ class PrinterExampleTest extends TestCase
     /**
      * @test
      */
-    public function it_checks_test_works()
+    public function it_checks_test_works(): void
     {
-        $this->assertEquals(2, 2);
+        self::assertEquals(2, 2);
     }
 
     /**
      * @test
      */
-    public function it_checks_test_risky()
+    public function it_checks_test_risky(): void
     {
         $this->markAsRisky();
-        $this->assertEquals(2, 2);
+        self::assertEquals(2, 2);
     }
 
     /**
      * @test
      */
-    public function it_checks_test_incomplete()
+    public function it_checks_test_incomplete(): void
     {
-        $this->assertEquals(2, 2);
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        self::assertEquals(2, 2);
+        self::markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
      * @test
      */
-    public function it_checks_test_fail()
+    public function it_checks_test_fail(): void
     {
-        $this->fail('Test fail');
+        self::fail('Test fail');
     }
 
     /**
      * @test
      */
-    public function it_checks_test_warning()
+    public function it_checks_test_warning(): void
     {
         $this->addWarning('BasketRepository not exists');
     }
@@ -49,7 +49,7 @@ class PrinterExampleTest extends TestCase
     /**
      * @test
      */
-    public function it_checks_test_error()
+    public function it_checks_test_error(): void
     {
         fopen();
     }
@@ -57,8 +57,8 @@ class PrinterExampleTest extends TestCase
     /**
      * @test
      */
-    public function it_checks_test_skipped()
+    public function it_checks_test_skipped(): void
     {
-        $this->markTestSkipped('This test has been skipped.');
+        self::markTestSkipped('This test has been skipped.');
     }
 }

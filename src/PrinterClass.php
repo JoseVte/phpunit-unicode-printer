@@ -5,7 +5,7 @@ namespace PHPUnit;
 use ReflectionClass;
 use PHPUnit\Framework\Test;
 use PHPUnit\Runner\TestHook;
-use PHPUnit\TextUI\ResultPrinter;
+use PHPUnit\TextUI\DefaultResultPrinter;
 use SebastianBergmann\Environment\Console;
 
 /**
@@ -13,7 +13,7 @@ use SebastianBergmann\Environment\Console;
  *
  * @license MIT
  */
-class PrinterClass extends ResultPrinter implements TestHook
+class PrinterClass extends DefaultResultPrinter implements TestHook
 {
     use FormatOutput;
 
@@ -82,7 +82,7 @@ class PrinterClass extends ResultPrinter implements TestHook
     {
         $class = new ReflectionClass(get_class($test));
         $className = $class->getShortName();
-        $remove = str_replace(array('/vendor/josrom', '/phpunit-unicode-printer/src'), '', dirname(__FILE__));
+        $remove = str_replace(array('/vendor/josrom', '/phpunit-unicode-printer/src'), '', __DIR__);
         $class = str_replace(array($remove, '/tests'), '', dirname($class->getFileName()));
         $this->className = empty($class) ? ' > Unit tests' : str_replace('/', ' > ', $class);
         $this->className .= ' > '.$className;

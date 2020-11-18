@@ -40,7 +40,7 @@ trait FormatOutput
     /**
      * Prints the Class Name if it has changed.
      */
-    protected function printClassName()
+    protected function printClassName(): void
     {
         if ($this->lastClassName === $this->className) {
             return;
@@ -69,7 +69,7 @@ trait FormatOutput
      * @param string $color
      * @param string $buffer Result of the Test Case => . F S I R
      */
-    protected function printTestCaseStatus($color, $buffer)
+    protected function printTestCaseStatus(string $color, string $buffer): void
     {
         if ($this->isCIEnvironment()) {
             echo $buffer;
@@ -119,9 +119,9 @@ trait FormatOutput
     /**
      * Print the status of tests at end of line.
      */
-    protected function printTestsStatus()
+    protected function printTestsStatus(): void
     {
-        if ((($this->spaceAfter / $this->sizeUnicode) >= ($this->maxNumberOfColumns - $this->sizeUnicode) && $this->numTestsRun <= $this->numTests) || $this->numTestsRun == $this->numTests) {
+        if ((($this->spaceAfter / $this->sizeUnicode) >= ($this->maxNumberOfColumns - $this->sizeUnicode) && $this->numTestsRun <= $this->numTests) || $this->numTestsRun === $this->numTests) {
             $this->write(str_repeat(' ', $this->maxNumberOfColumns - ($this->spaceAfter / $this->sizeUnicode)));
             $this->spaceAfter = 0;
 
@@ -141,7 +141,7 @@ trait FormatOutput
      *
      * @return string
      */
-    protected function formatClassName($className)
+    protected function formatClassName(string $className): string
     {
         if (strlen($className) <= $this->maxClassNameLength) {
             return $className;
@@ -158,14 +158,13 @@ trait FormatOutput
      *
      * @return bool
      */
-    protected function isCIEnvironment()
+    protected function isCIEnvironment(): bool
     {
         return isset($_SERVER['PHP_CI']) && $_SERVER['PHP_CI'] === 'true';
     }
 
     /**
      * {@inheritdoc}
-     * @throws \ReflectionException
      */
     protected function printDefectTrace(TestFailure $defect) : void
     {
