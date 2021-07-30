@@ -18,7 +18,6 @@ class PrinterExampleTest extends TestCase
     public function it_checks_test_risky(): void
     {
         $this->markAsRisky();
-        self::assertEquals(2, 2);
     }
 
     /**

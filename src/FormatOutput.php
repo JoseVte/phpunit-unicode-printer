@@ -54,7 +54,7 @@ trait FormatOutput
 
         echo PHP_EOL;
         $className = $this->formatClassName($this->className);
-        if ($this->colors === true) {
+        if (true === $this->colors) {
             $this->writeWithColor('fg-cyan,bold', $className, false);
         } else {
             $this->write($className);
@@ -66,7 +66,6 @@ trait FormatOutput
     }
 
     /**
-     * @param string $color
      * @param string $buffer Result of the Test Case => . F S I R
      */
     protected function printTestCaseStatus(string $color, string $buffer): void
@@ -136,10 +135,6 @@ trait FormatOutput
 
     /**
      * Limit the class name.
-     *
-     * @param string $className
-     *
-     * @return string
      */
     protected function formatClassName(string $className): string
     {
@@ -155,18 +150,16 @@ trait FormatOutput
      * deactivated because they are not correct displayed in the report.
      *
      * At the moment only travis is support and when its manually disabled
-     *
-     * @return bool
      */
     protected function isCIEnvironment(): bool
     {
-        return isset($_SERVER['PHP_CI']) && $_SERVER['PHP_CI'] === 'true';
+        return isset($_SERVER['PHP_CI']) && 'true' === $_SERVER['PHP_CI'];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function printDefectTrace(TestFailure $defect) : void
+    protected function printDefectTrace(TestFailure $defect): void
     {
         $this->write($this->formatExceptionMsg($defect->getExceptionAsString()));
         $trace = Filter::getFilteredStacktrace(
@@ -191,7 +184,7 @@ trait FormatOutput
      *
      * @param $exceptionMessage
      *
-     * @return mixed|null|string|string[]
+     * @return string|string[]|null
      */
     protected function formatExceptionMsg($exceptionMessage)
     {

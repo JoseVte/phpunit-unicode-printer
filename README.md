@@ -11,7 +11,7 @@
 To get the last version of PHPUnit Unicode Printer, simply require the project using [Composer](https://getcomposer.org/):
 
 ```bash
-composer require --dev josrom/phpunit-unicode-printer:0.5.*
+composer require --dev josrom/phpunit-unicode-printer:9.*
 ```
 
 Instead, you may of course manually update your require block and run composer update if you so choose:
@@ -19,7 +19,7 @@ Instead, you may of course manually update your require block and run composer u
 ```json
 {
     "require-dev": {
-        "josrom/phpunit-unicode-printer": "0.5.*"
+        "josrom/phpunit-unicode-printer": "9.*"
     }
 }
 ```
@@ -46,13 +46,24 @@ or
  </phpunit>
 ```
 
+or
+
+```xml
+<phpunit ...
+         colors="true"
+         printerClass="PHPUnit\PrinterMethod"
+         ...>
+         ...
+ </phpunit>
+```
+
 ### PHPUnit 8
 
-For previous versions of PHPUnit use the tag [`0.4.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit8)
+For previous versions of PHPUnit use the tag [`0.4.*` or `8.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit8)
 
 ### PHPUnit 7
 
-For previous versions of PHPUnit use the tag [`0.3.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit7)
+For previous versions of PHPUnit use the tag [`0.3.*` or `7.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit7)
 
 ### PHPUnit 6
 

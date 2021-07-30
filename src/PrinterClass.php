@@ -9,7 +9,7 @@ use PHPUnit\TextUI\DefaultResultPrinter;
 use SebastianBergmann\Environment\Console;
 
 /**
- * Class Printer.
+ * Class PrinterClass.
  *
  * @license MIT
  */
@@ -65,7 +65,7 @@ class PrinterClass extends DefaultResultPrinter implements TestHook
     ) {
         parent::__construct($out, $verbose, $colors, $debug, $numberOfColumns);
 
-        if ($numberOfColumns === 'max') {
+        if ('max' === $numberOfColumns) {
             $console = new Console();
             $numberOfColumns = $console->getNumberOfColumns();
         }
@@ -75,15 +75,13 @@ class PrinterClass extends DefaultResultPrinter implements TestHook
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \ReflectionException
      */
-    public function startTest(Test $test) : void
+    public function startTest(Test $test): void
     {
         $class = new ReflectionClass(get_class($test));
         $className = $class->getShortName();
-        $remove = str_replace(array('/vendor/josrom', '/phpunit-unicode-printer/src'), '', __DIR__);
-        $class = str_replace(array($remove, '/tests'), '', dirname($class->getFileName()));
+        $remove = str_replace(['/vendor/josrom', '/phpunit-unicode-printer/src'], '', __DIR__);
+        $class = str_replace([$remove, '/tests'], '', dirname($class->getFileName()));
         $this->className = empty($class) ? ' > Unit tests' : str_replace('/', ' > ', $class);
         $this->className .= ' > '.$className;
         parent::startTest($test);
