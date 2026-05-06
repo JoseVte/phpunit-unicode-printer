@@ -2,7 +2,8 @@ composer.phar
 composer.lock
 /phpunit.xml
 /vendor/
-.idea/
+/.idea/
+/.phpunit.cache
 .phpunit.result.cache
 .php-cs-fixer.cache
 

@@ -8,67 +8,116 @@
 
 ### Installation
 
-To get the last version of PHPUnit Unicode Printer, simply require the project using [Composer](https://getcomposer.org/):
+Require the package with [Composer](https://getcomposer.org/):
 
 ```bash
-composer require --dev josrom/phpunit-unicode-printer:9.*
+composer require --dev josrom/phpunit-unicode-printer:10.*
 ```
 
-Instead, you may of course manually update your require block and run composer update if you so choose:
+Or update your `require-dev` block manually and run `composer update`:
 
 ```json
 {
     "require-dev": {
-        "josrom/phpunit-unicode-printer": "9.*"
+        "josrom/phpunit-unicode-printer": "10.*"
     }
 }
 ```
 
-Modify the `phpunit.xml` to add the printer:
+### Configuration (PHPUnit 10)
+
+PHPUnit 10 removed the `printerClass` XML attribute and replaced the printer
+architecture with an event-driven extension system. Register the printer as a
+`<bootstrap>` extension in your `phpunit.xml`:
 
 ```xml
 <phpunit ...
          colors="true"
-         printerClass="PHPUnit\Printer"
          ...>
-         ...
- </phpunit>
+    <extensions>
+        <bootstrap class="PHPUnit\Extension\UnicodePrinterMethod"/>
+    </extensions>
+    ...
+</phpunit>
 ```
 
-or
+Pick **one** of the three available extensions depending on the level of detail
+you want:
+
+| Extension class                                | Output                                                       |
+|------------------------------------------------|--------------------------------------------------------------|
+| `PHPUnit\Extension\UnicodePrinter`             | One progress symbol per test, grouped by test directory.     |
+| `PHPUnit\Extension\UnicodePrinterClass`        | One progress symbol per test, grouped by directory + class.  |
+| `PHPUnit\Extension\UnicodePrinterMethod`       | One full row per test (`(N/M) ✓ Class: Method (Xms)`).       |
+
+#### Status symbols
+
+| Status      | Symbol | Color    |
+|-------------|--------|----------|
+| Passed      | ✓      | green    |
+| Failed      | ✗      | red      |
+| Errored     | ✗      | magenta  |
+| Warning     | ✗      | yellow   |
+| Risky       | ✓      | yellow   |
+| Deprecation | ⚠      | yellow   |
+| Notice      | ℹ      | cyan     |
+| Incomplete  | ✓      | blue     |
+| Skipped     | ✗      | blue     |
+
+To make a test be flagged as **Risky**, set
+`beStrictAboutTestsThatDoNotTestAnything="true"` on `<phpunit>` and write a
+test method without any assertion.
+
+#### Disable PHPUnit's default progress output
+
+PHPUnit 10 always renders its own dotted progress (`.IIFWES…`). To avoid two
+progress streams interleaving, run PHPUnit with the `--no-progress` flag:
+
+```bash
+./vendor/bin/phpunit --no-progress
+```
+
+A convenient way is to alias it in your `composer.json` scripts section:
+
+```json
+{
+    "scripts": {
+        "test": "phpunit --no-progress"
+    }
+}
+```
+
+> Note: `--no-progress` is currently a CLI-only option in PHPUnit 10.1; there is
+> no equivalent attribute on the `<phpunit>` element.
+
+### Migrating from older versions
+
+The old `printerClass="..."` attribute was removed by PHPUnit 10. Replace any
+of these:
 
 ```xml
-<phpunit ...
-         colors="true"
-         printerClass="PHPUnit\PrinterClass"
-         ...>
-         ...
- </phpunit>
+<phpunit printerClass="PHPUnit\Printer" ...>
+<phpunit printerClass="PHPUnit\PrinterClass" ...>
+<phpunit printerClass="PHPUnit\PrinterMethod" ...>
 ```
 
-or
+with the corresponding `<extensions>` block shown above. The original three
+class names map to the new ones as:
 
-```xml
-<phpunit ...
-         colors="true"
-         printerClass="PHPUnit\PrinterMethod"
-         ...>
-         ...
- </phpunit>
-```
+| Before (PHPUnit ≤ 9) | After (PHPUnit 10)                     |
+|----------------------|-----------------------------------------|
+| `PHPUnit\Printer`        | `PHPUnit\Extension\UnicodePrinter`        |
+| `PHPUnit\PrinterClass`   | `PHPUnit\Extension\UnicodePrinterClass`   |
+| `PHPUnit\PrinterMethod`  | `PHPUnit\Extension\UnicodePrinterMethod`  |
 
-### PHPUnit 8
+### Older PHPUnit versions
 
-For previous versions of PHPUnit use the tag [`0.4.*` or `8.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit8)
+For previous versions of PHPUnit use these tags:
 
-### PHPUnit 7
-
-For previous versions of PHPUnit use the tag [`0.3.*` or `7.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit7)
-
-### PHPUnit 6
-
-For previous versions of PHPUnit use the tag [`0.2.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit6)
-
-### PHPUnit <5
-
-For previous versions of PHPUnit use the tag [`0.1.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit5)
+| PHPUnit  | Tag                                                                                          |
+|----------|----------------------------------------------------------------------------------------------|
+| 9        | [`9.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit9)                    |
+| 8        | [`0.4.*` or `8.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit8)         |
+| 7        | [`0.3.*` or `7.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit7)         |
+| 6        | [`0.2.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit6)                  |
+| <5       | [`0.1.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit5)                  |
