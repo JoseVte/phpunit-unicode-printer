@@ -8,15 +8,15 @@
 
 ### Requirements
 
-- PHP 8.3+
-- PHPUnit 12.x
+- PHP 8.4+
+- PHPUnit 13.x
 
 ### Installation
 
 Require the package with [Composer](https://getcomposer.org/):
 
 ```bash
-composer require --dev josrom/phpunit-unicode-printer:12.*
+composer require --dev josrom/phpunit-unicode-printer:13.*
 ```
 
 Or update your `require-dev` block manually and run `composer update`:
@@ -24,15 +24,15 @@ Or update your `require-dev` block manually and run `composer update`:
 ```json
 {
     "require-dev": {
-        "josrom/phpunit-unicode-printer": "12.*"
+        "josrom/phpunit-unicode-printer": "13.*"
     }
 }
 ```
 
-### Configuration (PHPUnit 10 / 11 / 12)
+### Configuration (PHPUnit 10 / 11 / 12 / 13)
 
 PHPUnit 10 removed the `printerClass` XML attribute and replaced the printer
-architecture with an event-driven extension system, which PHPUnit 11 and 12
+architecture with an event-driven extension system, which PHPUnit 11, 12 and 13
 keep. Register the printer as a `<bootstrap>` extension in your `phpunit.xml`:
 
 ```xml
@@ -75,7 +75,7 @@ test method without any assertion.
 
 #### Disable PHPUnit's default progress output
 
-PHPUnit 10/11/12 always renders its own dotted progress (`.IIFWES…`). To avoid two
+PHPUnit 10/11/12/13 always renders its own dotted progress (`.IIFWES…`). To avoid two
 progress streams interleaving, run PHPUnit with the `--no-progress` flag:
 
 ```bash
@@ -109,7 +109,7 @@ of these:
 with the corresponding `<extensions>` block shown above. The original three
 class names map to the new ones as:
 
-| Before (PHPUnit ≤ 9) | After (PHPUnit 10 / 11 / 12)           |
+| Before (PHPUnit ≤ 9) | After (PHPUnit 10 / 11 / 12 / 13)      |
 |----------------------|-----------------------------------------|
 | `PHPUnit\Printer`        | `PHPUnit\Extension\UnicodePrinter`        |
 | `PHPUnit\PrinterClass`   | `PHPUnit\Extension\UnicodePrinterClass`   |
@@ -121,6 +121,7 @@ For previous versions of PHPUnit use these tags:
 
 | PHPUnit  | Tag                                                                                          |
 |----------|----------------------------------------------------------------------------------------------|
+| 12       | [`12.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit12)                  |
 | 11       | [`11.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit11)                  |
 | 10       | [`10.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit10)                  |
 | 9        | [`9.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit9)                    |
