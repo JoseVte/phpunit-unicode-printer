@@ -6,12 +6,17 @@
 <a href="https://packagist.org/packages/josrom/phpunit-unicode-printer"><img src="https://poser.pugx.org/josrom/phpunit-unicode-printer/license.svg" alt="License"></a>
 </p>
 
+### Requirements
+
+- PHP 8.2+
+- PHPUnit 11.x
+
 ### Installation
 
 Require the package with [Composer](https://getcomposer.org/):
 
 ```bash
-composer require --dev josrom/phpunit-unicode-printer:10.*
+composer require --dev josrom/phpunit-unicode-printer:11.*
 ```
 
 Or update your `require-dev` block manually and run `composer update`:
@@ -19,16 +24,16 @@ Or update your `require-dev` block manually and run `composer update`:
 ```json
 {
     "require-dev": {
-        "josrom/phpunit-unicode-printer": "10.*"
+        "josrom/phpunit-unicode-printer": "11.*"
     }
 }
 ```
 
-### Configuration (PHPUnit 10)
+### Configuration (PHPUnit 10 / 11)
 
 PHPUnit 10 removed the `printerClass` XML attribute and replaced the printer
-architecture with an event-driven extension system. Register the printer as a
-`<bootstrap>` extension in your `phpunit.xml`:
+architecture with an event-driven extension system, which PHPUnit 11 keeps.
+Register the printer as a `<bootstrap>` extension in your `phpunit.xml`:
 
 ```xml
 <phpunit ...
@@ -70,7 +75,7 @@ test method without any assertion.
 
 #### Disable PHPUnit's default progress output
 
-PHPUnit 10 always renders its own dotted progress (`.IIFWES…`). To avoid two
+PHPUnit 10/11 always renders its own dotted progress (`.IIFWES…`). To avoid two
 progress streams interleaving, run PHPUnit with the `--no-progress` flag:
 
 ```bash
@@ -87,8 +92,8 @@ A convenient way is to alias it in your `composer.json` scripts section:
 }
 ```
 
-> Note: `--no-progress` is currently a CLI-only option in PHPUnit 10.1; there is
-> no equivalent attribute on the `<phpunit>` element.
+> Note: `--no-progress` is a CLI-only option; there is no equivalent attribute
+> on the `<phpunit>` element.
 
 ### Migrating from older versions
 
@@ -104,7 +109,7 @@ of these:
 with the corresponding `<extensions>` block shown above. The original three
 class names map to the new ones as:
 
-| Before (PHPUnit ≤ 9) | After (PHPUnit 10)                     |
+| Before (PHPUnit ≤ 9) | After (PHPUnit 10 / 11)                |
 |----------------------|-----------------------------------------|
 | `PHPUnit\Printer`        | `PHPUnit\Extension\UnicodePrinter`        |
 | `PHPUnit\PrinterClass`   | `PHPUnit\Extension\UnicodePrinterClass`   |
@@ -116,6 +121,7 @@ For previous versions of PHPUnit use these tags:
 
 | PHPUnit  | Tag                                                                                          |
 |----------|----------------------------------------------------------------------------------------------|
+| 10       | [`10.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit10)                  |
 | 9        | [`9.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit9)                    |
 | 8        | [`0.4.*` or `8.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit8)         |
 | 7        | [`0.3.*` or `7.*`](https://github.com/JoseVte/phpunit-unicode-printer/tree/phpunit7)         |
